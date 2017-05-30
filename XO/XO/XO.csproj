@@ -44,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassGameLogic.cs" />
+    <Compile Include="FieldState.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="SelectFigure.cs" />
     <Compile Include="XO.cs">
       <SubType>Form</SubType>
     </Compile>

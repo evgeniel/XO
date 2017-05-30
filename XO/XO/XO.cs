@@ -12,46 +12,53 @@ namespace XO
 {
     public partial class XO : Form
     {
-        Button[] buttons;
+        ClassGameLogic logic;
         public XO()
         {
             InitializeComponent();
 
-            buttons = new Button[]
-            {
-                button1, button2, button3, button4, button5, button6, button7, button8, button9,
-            };
+            button1.Tag = 0;
+            button2.Tag = 1;
+            button3.Tag = 2;
+            button4.Tag = 3;
+            button5.Tag = 4;
+            button6.Tag = 5;
+            button7.Tag = 6;
+            button8.Tag = 7;
+            button9.Tag = 8;
+
+            logic = new ClassGameLogic();
         }
+
+        private string figureU = "X";
+        private string figureC = "O";
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private string figureU;
-        private string figureC;
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
+        {/*
             figureU = "X";
             figureC = "O";
-            radioButton1.Enabled = false;
+            
             radioButton2.Enabled = false;
-            label1.Text = "Выбран Крестик!";
+            label1.Text = "Выбран Крестик!";*/
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
+        {/*
             figureU = "O";
             figureC = "X";
             radioButton1.Enabled = false;
-            radioButton2.Enabled = false;
-            label1.Text = "Выбран Нолик!";
+            
+            label1.Text = "Выбран Нолик!";*/
         }
 
         private void StartGame_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Enabled == false && radioButton2.Enabled == false)
+            /*if (radioButton1.Checked == true || radioButton2.Checked == true)
             {
                 for (int i = 0; i < buttons.Length; ++i)
                 {
@@ -60,118 +67,92 @@ namespace XO
                 }
                 label1.Text = "Игра началась!";
             } 
-            else
+            else 
             {
                 label1.Text = "Выберите фигуру!";
+            }*/
+            var field = logic.GetField();
+            for (int i = 0; i < field.Length; ++i)
+            {
+                var button = ((Button)Controls.Find("button" + (i + 1), false)[0]);
+                button.Enabled = true;
             }
+            logic.Start();
+            Reload(logic.GetState(), false);
         }
-
+        
         private void Clear_Click(object sender, EventArgs e)
-        {
+        {/*
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
             for (int i = 0; i < buttons.Length; ++i)
             {
                 buttons[i].Enabled = false;
                 buttons[i].Text = "";
             }
             label1.Text = null;
-            radioButton1.Enabled = true;
-            radioButton2.Enabled = true;
+            */
         }
 
         private void button_Click(object sender, EventArgs e)
         {
-            ((Button)sender).Text = figureU;
-            if (CheckGame())
+            Reload(logic.Step(Convert.ToInt32(((Button)sender).Tag), FieldState.Field_figureU), true);
+        }
+
+        private void Reload(GameState state, bool compStep)
+        {
+            var field = logic.GetField();
+            for (int i = 0; i < field.Length; ++i)
             {
-                label1.Text = "Вы победили!";
-                FinishGame();
-                return;
+                var button = ((Button)Controls.Find("button" + (i + 1), false)[0]);
+                button.Text = field[i] == FieldState.Field_figureC ? figureC : field[i] == FieldState.Field_figureU ? figureU : "";
             }
-            if (ChekEmptyButton())
+
+            switch (state)
             {
-                CompProgress();
-                if (CheckGame())
-                {
-                    label1.Text = "Вы проиграли!";
-                    FinishGame();
-                }
-                else if (!ChekEmptyButton())
-                {
+                case GameState.NotStart:
+                    label1.Text = "Игра не началась!";
+                    break;
+                case GameState.NoWin:
                     label1.Text = "Ничья!";
-                    FinishGame();
-                }
-            }
-            else
-            {
-                label1.Text = "Ничья!";
-                FinishGame();
-            }
-        }
-
-        private bool CheckGame()
-        {
-            if (button1.Text == figureU && button2.Text == figureU && button3.Text == figureU) { return true; }
-            if (button4.Text == figureU && button5.Text == figureU && button6.Text == figureU) { return true; }
-            if (button7.Text == figureU && button8.Text == figureU && button9.Text == figureU) { return true; }
-            if (button1.Text == figureU && button4.Text == figureU && button7.Text == figureU) { return true; }
-            if (button2.Text == figureU && button5.Text == figureU && button8.Text == figureU) { return true; }
-            if (button3.Text == figureU && button6.Text == figureU && button9.Text == figureU) { return true; }
-            if (button1.Text == figureU && button5.Text == figureU && button9.Text == figureU) { return true; }
-            if (button3.Text == figureU && button5.Text == figureU && button7.Text == figureU) { return true; }
-
-            if (button1.Text == figureC && button2.Text == figureC && button3.Text == figureC) { return true; }
-            if (button4.Text == figureC && button5.Text == figureC && button6.Text == figureC) { return true; }
-            if (button7.Text == figureC && button8.Text == figureC && button9.Text == figureC) { return true; }
-            if (button1.Text == figureC && button4.Text == figureC && button7.Text == figureC) { return true; }
-            if (button2.Text == figureC && button5.Text == figureC && button8.Text == figureC) { return true; }
-            if (button3.Text == figureC && button6.Text == figureC && button9.Text == figureC) { return true; }
-            if (button1.Text == figureC && button5.Text == figureC && button9.Text == figureC) { return true; }
-            if (button3.Text == figureC && button5.Text == figureC && button7.Text == figureC) { return true; }
-            return false;
-        }
-
-        private void FinishGame()
-        {
-            for (int i = 0; i < buttons.Length; ++i)
-            {
-                buttons[i].Enabled = false;
-            }
-        }
-
-        private void CompProgress()
-        {
-
-            if (buttons[new Random().Next(0, buttons.Length)].Text == "")
-            {
-                buttons[new Random().Next(0, buttons.Length)].Text = figureC;
-                return;
-            }
-            else
-            {
-                for (int i = 0; i < buttons.Length; ++i)
-                {
-                    if (buttons[i].Text == "")
+                    break;
+                case GameState.figureCWin:
+                    label1.Text = "Вы проиграли!";
+                    break;
+                case GameState.figureUWin:
+                    label1.Text = "Вы выиграли!";
+                    break;
+                case GameState.InProgress:
+                    label1.Text = "Игра в процессе!";
+                    if (compStep)
                     {
-                        buttons[i].Text = figureC;
-                        return;
+                        Reload(logic.Step(CompProgress(logic.GetField()), FieldState.Field_figureC), false); 
+                    }
+                    break;
+            }
+        }
+
+        private int CompProgress(FieldState[] fields)
+        {
+            /*
+            if (fields[new Random().Next(0, fields.Length)] == FieldState.Empty)
+            {
+                fields[new Random().Next(0, fields.Length)] = figureC;
+                return i;
+            }*/
+            
+                for (int i = 0; i < fields.Length; ++i)
+                {
+                    if (fields[i] == FieldState.Empty)
+                    {
+                        
+                        return i;
                     }
                 }
-            }
-        }
-
-        private bool ChekEmptyButton()
-        {
-            for (int i = 0; i < buttons.Length; ++i)
-            {
-                if (buttons[i].Text == "")
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-               
-        
+                return -1;
+            
+        }       
     }
 }
