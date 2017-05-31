@@ -15,9 +15,12 @@ namespace XO
 
         private GameState state; // статус игры
 
+        public int stepCounter; // количество ходов
+
         public ClassGameLogic() // Конструктор в котором происходит инициализация полей
         {
             state = GameState.NotStart;
+            stepCounter = 0;
             fields = new List<FieldState>();
             // заплоним список пустыми ячейками, в зависимости от размерности поля, 3*3
             for (int i = 0; i < size * size; ++i)
@@ -34,6 +37,7 @@ namespace XO
                 fields[i] = FieldState.Empty;
             }
             state = GameState.InProgress;
+            stepCounter = 0;
         }
 
         public FieldState[] GetField() // возвращение в виде массива
@@ -52,6 +56,15 @@ namespace XO
 
             if (index > -1 && index < fields.Count)
             {
+                if (fields[index] != FieldState.Empty)
+                {
+                    //throw new System.Exception("Ячейка занята!");
+                    throw new XOException()
+                    {
+                        col = index % 3 + 1,
+                        row = index / 3 + 1
+                    };
+                }
                 fields[index] = field;
                 if (!CheckGame() && !ChekEmptyButton())
                 {
@@ -130,6 +143,31 @@ namespace XO
                 }
             }
             return false;
+        }
+
+        public void SaveStat() //сохранение статистики
+        {
+            try
+            {
+                var data = new List<Statistcs>();
+                string filePath = @"C:\Users\EvgenieL\Source\Repos\XO\XO\stats.xml";
+                data = Serializer.GetData(filePath);
+
+                data.Add(new Statistcs()
+                {
+                    Date = DateTime.Now,
+                    Result = state,
+                    StepCounter = stepCounter,
+                    UserFirst = true
+                });
+
+                Serializer.SetData(filePath, data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace XO
 {
     //Возможные состояние игры
-    enum GameState
+    public enum GameState
     {
         NotStart, // Игра не началась
         InProgress, // В процессе

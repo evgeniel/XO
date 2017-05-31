@@ -71,12 +71,7 @@ namespace XO
             {
                 label1.Text = "Выберите фигуру!";
             }*/
-            var field = logic.GetField();
-            for (int i = 0; i < field.Length; ++i)
-            {
-                var button = ((Button)Controls.Find("button" + (i + 1), false)[0]);
-                button.Enabled = true;
-            }
+            
             logic.Start();
             Reload(logic.GetState(), false);
         }
@@ -98,7 +93,25 @@ namespace XO
 
         private void button_Click(object sender, EventArgs e)
         {
-            Reload(logic.Step(Convert.ToInt32(((Button)sender).Tag), FieldState.Field_figureU), true);
+            try
+            {
+                Reload(logic.Step(Convert.ToInt32(((Button)sender).Tag), FieldState.Field_figureU), true);
+                errorlabel2.Text = "";
+            }
+            catch (XOException ex)
+            {
+                errorlabel2.Text = string.Format("Ячейка {0} {1} занята", ex.row, ex.col);
+            }
+            catch (Exception ex)
+            {
+                errorlabel2.Text = ex.Message;
+            }
+            finally
+            {
+                int x;
+                Int32.TryParse(label2.Text, out x);
+                label2.Text = (x + 1).ToString();
+            }
         }
 
         private void Reload(GameState state, bool compStep)
@@ -113,19 +126,24 @@ namespace XO
             switch (state)
             {
                 case GameState.NotStart:
-                    label1.Text = "Игра не началась!";
-                    break;
+                    //label1.Text = "Игра не началась!";
+                    //break;
+                    throw new Exception("Игра не началась!");
                 case GameState.NoWin:
                     label1.Text = "Ничья!";
+                    logic.SaveStat();
                     break;
                 case GameState.figureCWin:
                     label1.Text = "Вы проиграли!";
+                    logic.SaveStat();
                     break;
                 case GameState.figureUWin:
                     label1.Text = "Вы выиграли!";
+                    logic.SaveStat();
                     break;
                 case GameState.InProgress:
                     label1.Text = "Игра в процессе!";
+                    logic.stepCounter++;
                     if (compStep)
                     {
                         Reload(logic.Step(CompProgress(logic.GetField()), FieldState.Field_figureC), false); 
@@ -153,6 +171,16 @@ namespace XO
                 }
                 return -1;
             
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            var data = Serializer.GetData(@"C:/Users/EvgenieL/Source/Repos/XO/XO/stats.xml");
+
+            var statsForm = new statsForm();
+
+            statsForm.dataGridView1.DataSource = data;
+            statsForm.Show();
         }       
     }
 }
