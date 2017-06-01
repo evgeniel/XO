@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace XO
 {
-    [XmlType("stat")]
+    [DataContract]
     public class Statistcs
     {
-        [XmlElement("date")]
+        [DataMember]
         public DateTime Date { get; set; }
 
-        [XmlElement]
+        [DataMember]
         public GameState Result { get; set; }
 
-        [XmlAttribute("step")]
+        [DataMember]
         public int StepCounter { get; set; }
 
-        [XmlIgnore]
+        [DataMember]
         public bool UserFirst { get; set; }
     }
 }

@@ -150,7 +150,8 @@ namespace XO
             try
             {
                 var data = new List<Statistcs>();
-                string filePath = "stats.xml";
+                string filePath = "stats.json";
+
                 data = Serializer.GetData(filePath);
 
                 data.Add(new Statistcs()
@@ -161,7 +162,9 @@ namespace XO
                     UserFirst = true
                 });
 
+                
                 Serializer.SetData(filePath, data);
+                
                 
             }
             catch (Exception ex)

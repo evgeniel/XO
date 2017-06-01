@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace XO
 {
@@ -12,20 +13,20 @@ namespace XO
     {
         public static void SetData(string filePath, List<Statistcs> data)
         {
-            var xs = new XmlSerializer(typeof(List<Statistcs>));
+            var xs = new DataContractJsonSerializer(typeof(List<Statistcs>));
 
-            using (var sw = new StreamWriter(filePath))
+            using (var sw = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                xs.Serialize(sw, data);
+                xs.WriteObject(sw, data);
             }
         }
         public static List<Statistcs> GetData(string filePath)
         {
-            var xs = new XmlSerializer(typeof(List<Statistcs>));
- 
-            using (var sr = new StreamReader(filePath))
+            var xs = new DataContractJsonSerializer(typeof(List<Statistcs>));
+
+            using (var sr = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                return xs.Deserialize(sr) as List<Statistcs>;
+                return xs.ReadObject(sr) as List<Statistcs>;
             }
         }
     }
