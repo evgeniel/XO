@@ -151,7 +151,7 @@ namespace XO
             {
                 var data = new List<Statistcs>();
                 string filePath = "stats.xml";
-                
+                data = Serializer.GetData(filePath);
 
                 data.Add(new Statistcs()
                 {
@@ -162,7 +162,7 @@ namespace XO
                 });
 
                 Serializer.SetData(filePath, data);
-                data = Serializer.GetData(filePath);
+                
             }
             catch (Exception ex)
             {
