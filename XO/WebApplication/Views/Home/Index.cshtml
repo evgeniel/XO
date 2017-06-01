@@ -1,0 +1,32 @@
+﻿@Model WebApplication.Models.StatisticsModels
+@{
+    ViewBag.Title = "Статистика";
+}
+
+<h2>Статистика</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Дата</th>
+        <th>Количество ходов</th>
+        <th>Победитель</th>
+        <th>Первый ход</th>
+    </tr>
+    @foreach (var item in Model.StatisticsList)
+    {
+        <tr>
+            <td>@item.Date</td>
+            <td>@item.StepCounter</td>
+            <td>@item.Result</td>
+            @if (@item.UserFirst == true)
+            {
+                <td>Игрок</td>
+            }
+            else
+            {
+                <td>Компьютер</td>
+            }
+            
+        </tr>
+    }
+</table>
