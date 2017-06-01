@@ -35,9 +35,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 15);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(524, 224);
+            this.dataGridView1.Size = new System.Drawing.Size(535, 251);
             this.dataGridView1.TabIndex = 0;
             // 
             // statsForm
@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(561, 275);
             this.Controls.Add(this.dataGridView1);
             this.Name = "statsForm";
-            this.Text = "statsForm";
+            this.Text = "Статистика";
             this.Load += new System.EventHandler(this.statsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
