@@ -150,8 +150,8 @@ namespace XO
             try
             {
                 var data = new List<Statistcs>();
-                string filePath = @"C:\Users\EvgenieL\Source\Repos\XO\XO\stats.xml";
-                data = Serializer.GetData(filePath);
+                string filePath = "stats.xml";
+                
 
                 data.Add(new Statistcs()
                 {
@@ -162,6 +162,7 @@ namespace XO
                 });
 
                 Serializer.SetData(filePath, data);
+                data = Serializer.GetData(filePath);
             }
             catch (Exception ex)
             {

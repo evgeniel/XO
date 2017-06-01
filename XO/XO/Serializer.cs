@@ -10,16 +10,6 @@ namespace XO
 {
     static class Serializer
     {
-        public static List<Statistcs> GetData(string filePath)
-        {
-            var xs = new XmlSerializer(typeof(List<Statistcs>));
-
-            using (var sr = new StreamReader(filePath))
-            {
-                return xs.Deserialize(sr) as List<Statistcs>;
-            }
-        }
-
         public static void SetData(string filePath, List<Statistcs> data)
         {
             var xs = new XmlSerializer(typeof(List<Statistcs>));
@@ -27,6 +17,15 @@ namespace XO
             using (var sw = new StreamWriter(filePath))
             {
                 xs.Serialize(sw, data);
+            }
+        }
+        public static List<Statistcs> GetData(string filePath)
+        {
+            var xs = new XmlSerializer(typeof(List<Statistcs>));
+ 
+            using (var sr = new StreamReader(filePath))
+            {
+                return xs.Deserialize(sr) as List<Statistcs>;
             }
         }
     }

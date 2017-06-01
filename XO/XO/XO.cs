@@ -175,7 +175,7 @@ namespace XO
 
         private void button10_Click(object sender, EventArgs e)
         {
-            var data = Serializer.GetData(@"C:/Users/EvgenieL/Source/Repos/XO/XO/stats.xml");
+            var data = Serializer.GetData("stats.xml");
 
             var statsForm = new statsForm();
 
