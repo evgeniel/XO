@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Newtonsoft.Json;
 using System.Web.Mvc;
 using WebApplication.Models;
+using XO;
+
 
 namespace WebApplication.Controllers
 {
@@ -27,5 +26,19 @@ namespace WebApplication.Controllers
 
             return View();
         }
+
+         [HttpPost]
+        public bool SaveGameInfo([System.Web.Http.FromBody]dynamic stat)
+        {
+            var newStat = JsonConvert.DeserializeObject<Statistcs>(stat.StatisticsList);
+            return StatisticsModels.AddStatistics(newStat);
+        }
+
+        [HttpGet]
+        public string GetGameInfo()
+        {
+            return JsonConvert.SerializeObject(new StatisticsModels().StatisticsList);
+        }
+
     }
 }

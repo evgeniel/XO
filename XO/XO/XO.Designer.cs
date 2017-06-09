@@ -39,9 +39,6 @@
             this.button9 = new System.Windows.Forms.Button();
             this.StartGame = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.Clear = new System.Windows.Forms.Button();
             this.errorlabel2 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
@@ -130,9 +127,9 @@
             // 
             // StartGame
             // 
-            this.StartGame.Location = new System.Drawing.Point(239, 21);
+            this.StartGame.Location = new System.Drawing.Point(217, 12);
             this.StartGame.Name = "StartGame";
-            this.StartGame.Size = new System.Drawing.Size(81, 32);
+            this.StartGame.Size = new System.Drawing.Size(81, 29);
             this.StartGame.TabIndex = 9;
             this.StartGame.Text = "Начать игру!";
             this.StartGame.UseVisualStyleBackColor = true;
@@ -142,51 +139,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(34, 194);
+            this.label1.Location = new System.Drawing.Point(210, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 10;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(239, 67);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(67, 17);
-            this.radioButton1.TabIndex = 11;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Крестик";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(239, 90);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(57, 17);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Нолик";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // Clear
-            // 
-            this.Clear.Location = new System.Drawing.Point(239, 146);
-            this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(81, 28);
-            this.Clear.TabIndex = 13;
-            this.Clear.Text = "Очистить";
-            this.Clear.UseVisualStyleBackColor = true;
-            this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // errorlabel2
             // 
             this.errorlabel2.AutoSize = true;
             this.errorlabel2.BackColor = System.Drawing.SystemColors.Control;
             this.errorlabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.errorlabel2.Location = new System.Drawing.Point(174, 194);
+            this.errorlabel2.Location = new System.Drawing.Point(199, 133);
             this.errorlabel2.Name = "errorlabel2";
             this.errorlabel2.Size = new System.Drawing.Size(0, 13);
             this.errorlabel2.TabIndex = 14;
@@ -196,7 +159,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(286, 194);
+            this.label2.Location = new System.Drawing.Point(285, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 15;
@@ -204,7 +167,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(239, 113);
+            this.button10.Location = new System.Drawing.Point(217, 47);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(81, 28);
             this.button10.TabIndex = 16;
@@ -216,13 +179,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 221);
+            this.ClientSize = new System.Drawing.Size(314, 188);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.errorlabel2);
-            this.Controls.Add(this.Clear);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.StartGame);
             this.Controls.Add(this.button9);
@@ -255,9 +215,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button StartGame;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Label errorlabel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button10;

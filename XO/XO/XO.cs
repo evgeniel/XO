@@ -30,65 +30,19 @@ namespace XO
             logic = new ClassGameLogic();
         }
 
-        private string figureU = "X";
-        private string figureC = "O";
+        public string figureU = "X";
+
+        public string figureC = "O";
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {/*
-            figureU = "X";
-            figureC = "O";
-            
-            radioButton2.Enabled = false;
-            label1.Text = "Выбран Крестик!";*/
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {/*
-            figureU = "O";
-            figureC = "X";
-            radioButton1.Enabled = false;
-            
-            label1.Text = "Выбран Нолик!";*/
-        }
-
         private void StartGame_Click(object sender, EventArgs e)
-        {
-            /*if (radioButton1.Checked == true || radioButton2.Checked == true)
-            {
-                for (int i = 0; i < buttons.Length; ++i)
-                {
-                    buttons[i].Enabled = true;
-                    buttons[i].Text = "";
-                }
-                label1.Text = "Игра началась!";
-            } 
-            else 
-            {
-                label1.Text = "Выберите фигуру!";
-            }*/
-            
+        {            
             logic.Start();
             Reload(logic.GetState(), false);
-        }
-        
-        private void Clear_Click(object sender, EventArgs e)
-        {/*
-            radioButton1.Enabled = true;
-            radioButton2.Enabled = true;
-            radioButton1.Checked = false;
-            radioButton2.Checked = false;
-            for (int i = 0; i < buttons.Length; ++i)
-            {
-                buttons[i].Enabled = false;
-                buttons[i].Text = "";
-            }
-            label1.Text = null;
-            */
         }
 
         private void button_Click(object sender, EventArgs e)
@@ -154,22 +108,25 @@ namespace XO
 
         private int CompProgress(FieldState[] fields)
         {
-            /*
             if (fields[new Random().Next(0, fields.Length)] == FieldState.Empty)
             {
-                fields[new Random().Next(0, fields.Length)] = figureC;
-                return i;
-            }*/
-            
+                fields[new Random().Next(0, fields.Length)] = FieldState.Field_figureC;
+                return new Random().Next(0, fields.Length);
+            }
+            else
+            {
                 for (int i = 0; i < fields.Length; ++i)
                 {
+
+
                     if (fields[i] == FieldState.Empty)
                     {
-                        
+
                         return i;
                     }
                 }
                 return -1;
+            }
             
         }
 

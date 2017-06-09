@@ -28,7 +28,8 @@ namespace XO
                 fields.Add(FieldState.Empty);
             }
         }
-
+        
+        
         public void Start() // Начало игры все поля делаем пустыми
         {
             
@@ -80,7 +81,7 @@ namespace XO
             return state;
         }
 
-        private bool CheckGame() //логика проверки полей на не пустые
+        private bool CheckGame() //логика проверки полей
         {
             //первая строка
             if (fields[0] == fields[1] && fields[1] == fields[2] && fields[0] != FieldState.Empty)
